@@ -34,7 +34,27 @@ class New extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       _TarjetaTopBar(neww: neww, index: index),
+      _TarjetaTittle(neww: neww)
     ]);
+  }
+}
+
+class _TarjetaTittle extends StatelessWidget {
+  final Article neww;
+  const _TarjetaTittle({
+    Key? key,
+    required this.neww,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      child: Text(
+        neww.title,
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+      ),
+    );
   }
 }
 
