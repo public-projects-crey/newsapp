@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/src/pages/tab1_page.dart';
+import 'package:newsapp/src/pages/tab2_page.dart';
 import 'package:provider/provider.dart';
 
 //api key: ac8b4c17482e4e2abc88577c44ae78a1
@@ -10,10 +11,10 @@ class TabsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => new _NavigationModel(),
+      create: (_) => _NavigationModel(),
       child: Scaffold(
         body: _Pages(),
-        bottomNavigationBar: _Navigation(),
+        bottomNavigationBar: const _Navigation(),
       ),
     );
   }
@@ -49,9 +50,7 @@ class _Pages extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         const Tab1Page(),
-        Container(
-          color: Colors.blue,
-        ),
+        const Tab2Page(),
       ],
     );
   }
@@ -59,19 +58,19 @@ class _Pages extends StatelessWidget {
 
 class _NavigationModel with ChangeNotifier {
   int _actualPage = 0;
-  PageController _pageController = new PageController(initialPage: 1);
+  PageController _pageController = new PageController(initialPage: 0);
 
-  int get actualPage => this._actualPage;
+  int get actualPage => _actualPage;
   set actualPage(int valor) {
-    print("page ${valor}");
+    print("page $valor");
     _pageController.animateToPage(
       valor,
-      duration: Duration(milliseconds: 250),
+      duration: const Duration(milliseconds: 250),
       curve: Curves.easeInOut,
     );
-    this._actualPage = valor;
+    _actualPage = valor;
     notifyListeners();
   }
 
-  PageController get pageController => this._pageController;
+  PageController get pageController => _pageController;
 }

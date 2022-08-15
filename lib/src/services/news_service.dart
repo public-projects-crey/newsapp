@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:newsapp/src/models/catergory_model.dart';
 import '../models/news_models.dart';
 
 final _URL_NEWS = 'https://newsapi.org/v2';
@@ -8,10 +10,20 @@ final _APIKEY = 'ac8b4c17482e4e2abc88577c44ae78a1';
 class NewsService with ChangeNotifier {
   List<Article> headLines = [];
 
+  List<Category> categories = [
+    Category(FontAwesomeIcons.building, 'business'),
+    Category(FontAwesomeIcons.tv, 'entertainment'),
+    Category(FontAwesomeIcons.addressCard, 'general'),
+    Category(FontAwesomeIcons.headSideVirus, 'health'),
+    Category(FontAwesomeIcons.vials, 'science'),
+    Category(FontAwesomeIcons.volleyball, 'sports'),
+    Category(FontAwesomeIcons.memory, 'technology'),
+  ];
+
   NewsService() {
     getTopHeadlines();
   }
-
+// business entertainment general health science sports technology
   getTopHeadlines() async {
     final url = "$_URL_NEWS/top-headlines?apiKey=$_APIKEY&country=co";
 
