@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => NewsService())],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Material App',
         home: TabsPage(),
         theme: myTheme,

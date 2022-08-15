@@ -34,8 +34,90 @@ class New extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       _TarjetaTopBar(neww: neww, index: index),
-      _TarjetaTittle(neww: neww)
+      _TarjetaTittle(neww: neww),
+      _TarjetaImage(urlImage: neww.urlToImage),
+      _TarjetaBody(neww: neww),
+      _TarjetaBtns(),
+      const SizedBox(
+        height: 10,
+      ),
+      Divider(),
     ]);
+  }
+}
+
+class _TarjetaBtns extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RawMaterialButton(
+            onPressed: () {},
+            fillColor: myTheme.accentColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Icon(Icons.star_outline_rounded),
+          ),
+          SizedBox(width: 10),
+          RawMaterialButton(
+            onPressed: () {},
+            fillColor: Colors.blue,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Icon(Icons.more),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _TarjetaBody extends StatelessWidget {
+  final Article neww;
+  const _TarjetaBody({
+    Key? key,
+    required this.neww,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        neww.description ?? '',
+      ),
+    );
+  }
+}
+
+class _TarjetaImage extends StatelessWidget {
+  final String urlImage;
+  const _TarjetaImage({Key? key, required this.urlImage})
+      : super(
+          key: key,
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(50)),
+        child: Container(
+          child: (urlImage != null)
+              ? FadeInImage(
+                  placeholder: AssetImage('assets/img/giphy.gif'),
+                  image: NetworkImage(urlImage),
+                )
+              : Image(
+                  image: AssetImage('assets/img/no-image.png'),
+                ),
+        ),
+      ),
+    );
   }
 }
 
