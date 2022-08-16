@@ -24,10 +24,13 @@ class NewsService with ChangeNotifier {
 
   String get selectedCategory => _selectedCategory;
   set selectedCategory(String valor) {
-    _selectedCategory + valor;
+    _selectedCategory = valor;
     getArticlesByCategory(valor);
     notifyListeners();
   }
+
+  List<Article> get getArticleCategorySelected =>
+      categoryArticles[selectedCategory] ?? [];
 
   NewsService() {
     getTopHeadlines();
